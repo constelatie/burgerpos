@@ -1,0 +1,65 @@
+body {
+    background-image: url("https://static.vecteezy.com/system/resources/thumbnails/077/134/156/small/cheeseburger-seamless-pattern-flat-style-for-wrapping-paper-burger-food-layout-on-black-background-vector.jpg")
+
+}
+
+label {
+    font-weight: bold !important;
+    color: white !important;
+    padding-bottom: 15px !important;
+    padding-top: 15px;
+}
+
+p {
+    color: white !important;
+    font-size: 20px !important;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important   ;
+    padding-top: 20px;
+    font-weight: bold !important;
+}
+
+h1 {
+    font-weight: bold !important; 
+    color: white !important;
+    font-size: 40px;
+}
+
+h2 {
+    font-weight: bold !important; 
+    color: white !important;
+    font-size: 30px;
+    padding-bottom: 30px;
+}
+
+h3 {
+    font-weight: bold !important; 
+    color: white !important;
+    font-size: 25px;
+}
+
+li {
+    color: white !important;
+    font-size: 20px !important;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important   ;
+}
+
+option {
+    color: beige !important;
+    font-size: 20px !important;
+    font-family:cursive !important;
+}
+
+
+
+.btn-dark {
+  padding: 5px !important;
+  background-color:white !important;
+  margin: 5px !important;
+  color: black !important;
+  border: 2px solid white !important;
+}
+
+div {
+    text-align: center !important;
+}
+
