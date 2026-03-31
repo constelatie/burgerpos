@@ -25,7 +25,7 @@ function checkOrder() {
     //basically go through every step to see if the user put in something
     return model.activeSteps.every(step => {
       const choice = model.order[step.key];
-      //checks if the choice of is not null for multiple choice or undefined for checkbox
+      //checks if the choice of is not null for multiple choice or undefined for checkbox or "" for the sauce text input. returns choice only if it meets all three criteria
       return choice !== undefined && choice !== null && choice !== "";
     });
   }
