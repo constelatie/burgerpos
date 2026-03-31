@@ -90,12 +90,3 @@ div {
     list-style-type: none;
 }
 
-.finalpicture img {
-    margin: auto;
-    padding: auto;
-    width: 50px !important;
-    height: 50px !important;
-    border: 5px solid white !important;
-    display: block;
-}
-
