@@ -151,10 +151,6 @@ function showStep() {
             if (previousStep && typeof previousStep.feedback === "string") {
               let lastChoice = model.order[previousStep.key];
               feedbackMessage = previousStep.feedback.replace("{{option}}", lastChoice);
-              //function to remove the feedback message from the top after 5 seconds
-              setTimeout(() => {
-                feedback.remove()
-              }, 5000);
     }
         
         
