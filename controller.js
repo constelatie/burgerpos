@@ -162,7 +162,7 @@ function showStep() {
               feedbackMessage = previousStep.feedback.replace("{{option}}", lastChoice);
     }
 
-  function checkOrder {
+  function checkOrder() {
     //basically go through every step to see if the user put in something
     return model.activeSteps.every(step => {
       const choice = model.order[step.key];
