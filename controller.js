@@ -127,7 +127,7 @@ function startApp() {
       }
       if(e.target.id === "home") {
         e.preventDefault();
-        alert("Going back to the start, + model.username + "!");
+        alert("Going back to the start, " + model.username + "!");
         render_view("starttemplate", {});
       }
       //if the user missed some steps and wants to go back, resets the step index and uses showstep() to go back to the start of the step view
