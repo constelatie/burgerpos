@@ -36,8 +36,8 @@ function startApp() {
   //fetch json file for the info
     fetch('https://jsonplaceholder.typicode.com/post', {
       method: 'POST',
-      body: JSON.stringify(myBurgerData);
-    ,
+      body: JSON.stringify(myBurgerData),
+    }
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
   },
