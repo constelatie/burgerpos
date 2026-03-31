@@ -22,12 +22,19 @@ function render_view(view_id, data) {
 }
 //function to start the app 
 function startApp() {
-  fetch("./burgers.json").then((response) => {return response.json});
-  then((results) ==> { activeSteps = results; })
-  catch((err) => { console.error(err));
+  //fetch json file for the info
+    fetch("./burgers.json")
+      //if there is a response, create the json
+        .then((response) => response.json()) 
+      //assign json data, then start
+        .then((data) => {
+            model.burgerChoices = data.burgerChoices;
+            render_view("starttemplate", {}); 
+        })
+        .catch((err) => {
+            console.error("Failed to load burger data:", err);
+        });
 }
-    //shows the start template first
-    render_view("starttemplate", {});
     document.addEventListener("submit", function(e) {
         //when the customer inputs their name and hits the button, moves to the menu screen
         if(e.target.id === "name") {
@@ -139,18 +146,11 @@ function startApp() {
 function showStep() {
     //step is set to whatever part of the json we're on
             let step = model.activeSteps[model.stepIndex];
-            //prevstep is the last step
-            let previousStep = model.activeSteps[model.stepIndex - 1];
-            //feedback started as blank
-            let feedbackMessage = "";
-            //checks if there is feedback for the last step and if it is a string value. this is basically here because of the saucecount step, where i was having trouble that it would say too many sauces but would 
-            //let you through anyway.
-            if (previousStep && typeof previousStep.feedback === "string") {
-                //sets the last choice to the value of the last step, so that it can be plugged into the feedback message
-                let lastChoice = model.order[previousStep.key];
-                //shows the value of the last choice in the feedback by replacing {{option}} with the actual choice made, so it is more personalized and specific to the user's order
-                feedbackMessage = previousStep.feedback.replace("{{option}}", lastChoice);
-            } 
+            let feedbackMessage = step.feedback.message;
+            alert(feedbackMessage);
+            setTimeout(() => {
+              alert.remove()
+            }, 5000);
         
         
 //the order in which the customization steps are shown, and the data for those steps, is based on the json in the model, which is based on the burger selected
