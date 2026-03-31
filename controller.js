@@ -120,6 +120,7 @@ function startApp() {
         e.preventDefault();
         alert("You missed some steps, " + model.username + "! Let's go back and fix that.")
         model.stepIndex = 0;
+        model.order = {};
         showStep();
       }
         //when the user picks their burger, activeSteps is assigned the json data for the steps of that burger, and the first step is shown
