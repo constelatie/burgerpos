@@ -86,7 +86,9 @@ function startApp() {
             showStep();
             }
             else {
-                render_view("summary", {username: model.username, order: model.order});
+              //checks if all steps are completed, then shows the user if all done
+                const done = checkOrder();
+                render_view("summary", {username: model.username, order: model.order, allFilled: done});
             }
             
         }
@@ -102,6 +104,13 @@ function startApp() {
           e.preventDefault();
           alert("Your order has been placed, " + model.username + "! Thank you for choosing Christiana's!");
           render_view("starttemplate", {});
+      }
+      //if the user missed some steps and wants to go back, resets the step index and uses showstep() to go back to the start of the step view
+      if(e.target.id === "go-back") {
+        e.preventDefault();
+        alert("You missed some steps, " + model.username + "! Let's go back and fix that.")
+        model.stepIndex = 0;
+        showStep();
       }
         //when the user picks their burger, activeSteps is assigned the json data for the steps of that burger, and the first step is shown
         if(e.target.id === "placeorder") {
