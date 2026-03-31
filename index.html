@@ -131,6 +131,13 @@
        <script id="summary" type="text/x-handlebars-template">
     <div class="summary">
         <h2>Order Complete, {{username}}!</h2>
+        {{#if allFilled}}
+            <p>Your burger looks perfect! Ready to send to the kitchen?</p>
+            <button type="submit" class="btn btn-success" id="confirm">Place Final Order</button>
+        {{else}}
+            <p>Warning: Some ingredients are missing from your selection.</p>
+            <button type="button" class="btn btn-warning" id="go-back">Go Back and Finish</button>
+        {{/if}}
         <p>Here is your custom burger:</p>
         <ul>
             <li>Bun: {{order.bun}}</li>
