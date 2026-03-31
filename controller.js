@@ -1,122 +1,304 @@
+//looked up documentation for this because i couldnt get handlebars to accept issuchandsuch, link here: https://handlebarsjs.com/guide/builtin-helpers.html
+
+Handlebars.registerHelper('isdefined', function (value) {
+  return value !== undefined;
+});
+
+// steps up the model ( static api ) for the html to pull from 
 const model = {
     menu: null,
-    username: "",
-    selectedBurger: "classic",
-    stepindex: 0,
-    steps: [
+    username: "", //will hold customer name
+    order: {}, //will hold the current order selections as key value pairs
+    selectedBurger: "", //will hold the type of burger selected to determine which steps to show, either classic or cheeseburger
+    stepIndex: 0,
+    activeSteps: [], //based on the burger selected, shows necessary steps 
+    burgerChoices: {
+    classic: [ //classic burger steps
             {
                 id: "bun",
+                key: "bun",
                 title: "Choose your bun",
-                options: ["sesame", "whole wheat", "gluten free"],
+                options: ["Sesame", "Whole Wheat", "Gluten Free"],
                 type: "multiple choice",
                 feedback: "Great choice! The {{option}} bun is a delicious addition to your burger."
             },
             {
                 id: "protein",
+                key: "protein",
                 title: "Choose your protein",
-                options: ["beef", "chicken", "veggie"],
+                options: ["Beef", "Chicken", "Veggie"],
                 type: "multiple choice",
                 feedback: "Excellent! The {{option}} patty is a tasty choice for your burger."
             },
             {
                 id: "toppings",
+                key: "toppings",
                 title: "Choose your toppings",
-                options: ["lettuce", "tomato", "onion", "pickles", "cheese"],
-                type: "multiple choice",
+                options: ["Lettuce", "Tomato", "Onion", "Pickles", "Cheese"],
+                type: "checkbox",
                 feedback: "Yum! Adding {{option}} will give your burger an extra burst of flavor."
             },
             {
                 id: "sauces",
+                key: "sauces",
                 title: "Choose your sauces",
-                options: ["ketchup", "mustard", "mayo", "bbq sauce"],
+                options: ["Ketchup", "Mustard", "Mayo", "BBQ Sauce"],
+                type: "checkbox",
+                feedback: "Delicious! Adding {{option}} will enhance the taste of your burger."
+            },
+            {
+                id: "saucecount",
+                key: "saucecount",
+                title: "How many sauces would you like?",
                 type: "text",
                 feedback: {
                     condition: "amount > 4",
-                    message: "Wow, that's too much! The {{option}} will overpower your meal. Consider using less for a more balanced flavor."
+                    message: "Wow, that's too much! {{option}} sauces will overpower your meal. Consider using less for a more balanced flavor."
                 }
             },
             {
                 id: "extras",
+                key: "extras",
                 title: "Choose your extras",
-                options: ["bacon", "double patty", "fried egg"],
+                options: ["Bacon", "Double Patty", "Fried Egg"],
                 type: "multiple choice",
                 feedback: "Delicious! Adding {{option}} will take your burger to the next level."
             },
             {
                 id: "presentation",
+                key: "presentation",
                 title: "Choose your presentation",
                 imageOptions: [
-                    { "url": "https://blog-content.omahasteaks.com/wp-content/uploads/2022/06/blogwp_classic-american-burger-scaled-1.jpg", "label": "Classic Presentation" },
-                    { "url": "https://somuchfoodblog.com/classic-grilled-cheeseburgers/", "label": "Gourmet Presentation" },
-                    { "url": "https://png.pngtree.com/thumb_back/fw800/background/20250712/pngtree-classic-beef-burger-with-fresh-lettuce-tomato-onion-and-sesame-seed-image_17580392.webp", "label": "50s Checkered Presentation" }
+                    { "url": "https://blog-content.omahasteaks.com/wp-content/uploads/2022/06/blogwp_classic-american-burger-scaled-1.jpg"},
+                    { "url": "https://cdn.metrodiner.io/wp-content/uploads/s3.amazonaws.com/toasttab/restaurants/restaurant-155624000000000000/menu/items/5/item-800000002373861105_1755787838.jpg"},
+                    { "url": "https://png.pngtree.com/thumb_back/fw800/background/20250712/pngtree-classic-beef-burger-with-fresh-lettuce-tomato-onion-and-sesame-seed-image_17580392.webp"}
                 ],
                 type: "image-selection",
                 feedback: "Great choice! Serving your burger {{option}} will make it look as good as it tastes."
             }
-            
-
+        ],
+    cheeseburger: [ //cheeseburger steps
+        {
+                id: "bun",
+                key: "bun",
+                title: "Choose your bun",
+                options: ["Sesame", "Whole Wheat", "White Bread"],
+                type: "multiple choice",
+                feedback: "Great choice! The {{option}} bun is a delicious addition to your burger."
+            },
+            {
+                id: "protein",
+                key: "protein",
+                title: "Choose your protein",
+                options: ["Beef", "Steak", "Tofu"],
+                type: "multiple choice",
+                feedback: "Excellent! The {{option}} patty is a tasty choice for your burger."
+            },
+            {
+                id: "toppings",
+                key: "toppings",
+                title: "Choose your toppings",
+                options: ["Lettuce", "Tomato", "Onion", "Pickles", "Cheese"],
+                type: "checkbox",
+                feedback: "Yum! Adding {{option}} will give your burger an extra burst of flavor."
+            },
+            {
+                id: "sauces",
+                key: "sauces",
+                title: "Choose your sauces",
+                options: ["Ketchup", "Mustard", "Honey Mustard", "BBQ Sauce"],
+                type: "checkbox",
+                feedback: "Delicious! Adding {{option}} will enhance the taste of your burger."
+            },
+            {
+                id: "saucecount",
+                key: "saucecount",
+                title: "How many sauces would you like?",
+                type: "text",
+                feedback: {
+                    condition: "amount > 4",
+                    message: "Wow, that's too much! {{option}} sauces will overpower your meal. Consider using less for a more balanced flavor."
+                }
+            },
+            {
+                id: "extras",
+                key: "extras",
+                title: "Choose your extras",
+                options: ["Bacon", "Double Patty", "Fried Egg"],
+                type: "multiple choice",
+                feedback: "Delicious! Adding {{option}} will take your burger to the next level."
+            },
+            {
+                id: "presentation",
+                key: "presentation",
+                title: "Choose your presentation",
+                imageOptions: [
+                    { "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cheeseburger.jpg/1280px-Cheeseburger.jpg"},
+                    { "url": "https://www.kitchensanctuary.com/wp-content/uploads/2021/05/Double-Cheeseburger-square-FS-42.jpg"},
+                    { "url": "https://www.allrecipes.com/thmb/QQU_XsfGlF8Vi1PBfWFeBfDCewE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/279210double-cheeseburgerChefMo4x3-6da33f11c8174d718197444338ce7419.jpg"}
+                ],
+                type: "image-selection",
+                feedback: "Great choice! Serving your burger {{option}} will make it look as good as it tastes."
+            }
     ]
 }
-
+}
+//render view function that takes in the id of the template and shows it
 function render_view(view_id, data) {
     var source = document.querySelector("#"+view_id).innerHTML; 
     var template = Handlebars.compile(source); 
     var html = template(data); 
     document.querySelector("#view_widget").innerHTML = html; 
 }
-
+//function to start the app 
 function startApp() {
+    //shows the start template first
     render_view("starttemplate", {});
     document.addEventListener("submit", function(e) {
+        //when the customer inputs their name and hits the button, moves to the menu screen
         if(e.target.id === "name") {
             e.preventDefault();
             let customerName = document.getElementById("customername").value;
             model.username = customerName;
-            render_view("menu", {customerName: model.username});
+            render_view("menutemplate", {customerName: model.username});
         }
+        //for every step of the customization process
         if(e.target.id === "stepform") {
             e.preventDefault();
-            let step = model.steps[model.stepindex]
-            let value = [];
-            let inputs = document.querySelectorAll("input[name='option']:checked");
-            inputs.forEach(element => {
-                value.push(element.value);
-            });
+            //step becomes the index of activesteps, and the json data that was fed into it based on the selected burger 
+            let step = model.activeSteps[model.stepIndex];
+            //value of selection blank to start
+            let value = "";
+            //since multiple choices can be made, it selects all checked options, then foreach input, it gets pushed to the selected array. .join(", ") concatenates the array into a string with commas and spaces in between for readability.
+            if(step.type === "checkbox") {
+                let selected = [];
+                let inputs = document.querySelectorAll("input[name='option']:checked");
+                inputs.forEach(function(input) {
+                    selected.push(input.value);
+                });
+                value = selected.join(", ");
+            }
+            //only one answer can be selected, and that value gets pushed to the order object in the model with the key of the step, then moves to the next step
+            //if nothing is selected and the user tries to move forward, an alert pops up asking them to select an option to proceed.
+            else if(step.type === "multiple choice") {
+                let inputs = document.querySelector("input[name='option']:checked");
+                if(inputs.length === 0) {
+                    alert("Please select an option to proceed.");
+                    return;
+                }
+                value = inputs.value;
+            }
+            //takes whatever text is put in the text input and pushes that to the order object in the model with the key of the step, then moves to the next step
+            else if(step.type === "text") {
+                let textInput = document.getElementById("textInput").value;
+                value = textInput;
+            }
+            //takes whatever image was picked and pushes that to the order object in the model with the key of the step, then moves to the next step
+            else if(step.type === "image-selection") {
+                let imageInput = document.querySelector("input[name='option']:checked").value;
+                value = imageInput;
+            }
+            //index is incremented to move to the next step, and if there are no more steps, moves to the summary page with the order details
+            model.order[step.key] = value; //changes the value of the step to whatever was picked, like changing "bun" from blank to "sesame"
             model.stepIndex++;
-            if(model.stepIndex < model.steps.length) {
+            if(model.stepIndex < model.activeSteps.length) {
             showStep();
             }
             else {
-                render_view("summary", {username: model.username, selectedBurger: model.selectedBurger});
+                render_view("summary", {username: model.username, order: model.order});
             }
             
         }
     });
-}
-
-
-function readytoOrder() {
     document.addEventListener("click", function(e) {
+        //when the ready button is clicked, the order form is shown
         if(e.target.id === "ready") {
             e.preventDefault();
-            render_view("orderform", {});
+            render_view("orderform", {customerName: model.username});
+        }
+        //when the user picks their burger, activeSteps is assigned the json data for the steps of that burger, and the first step is shown
+        if(e.target.id === "placeorder") {
+            model.selectedBurger = document.getElementById("burger").value;
+        if (model.selectedBurger === "classic") {
+                model.activeSteps = model.burgerChoices.classic;
+            } else {
+                model.activeSteps = model.burgerChoices.cheeseburger;
+            }
+            //activesteps index set to the start, order is reset to blank if ordered before, and the first step is shown
+            model.stepIndex = 0;
+            model.order = {};
+            e.preventDefault();
             showStep();
     }
-})
-}
-
-function showStep() {
-            //model.stepindex++;
-            let step = model.steps[model.stepindex];
-            render_view("stepform", {title: step.title, options: step.options});
-        }
-
-    
-function showConfirmation() {
+    //happens at the end when the user confirms their order and the view resets to the start page
     if(e.target.id === "confirm") {
         e.preventDefault();
         alert("Your order has been placed, " + model.username + "! Thank you for choosing Christiana's!");
+        render_view("starttemplate", {});
     }
+})
 }
+    //eventlistener put in specifically to check how many sauces are inputted
+    document.addEventListener("input", function(e) {
+        if (e.target.id === "textInput") {
+            let step = model.activeSteps[model.stepIndex];
+            //input is a string, so change it to an integer to compare it to the condition in the feedback
+            if (step.id === "saucecount") {
+                let amount = parseInt(e.target.value);
+                //access the next button
+                let nextButton = document.querySelector("#next");
+                //if more than four sauces, disable the next button until less than four are put in
+                if (amount > 4) {
+                    nextButton.disabled = true;
+                    let lowerAmountMsg = step.feedback.message.replace("{{option}}", e.target.value);
+                    alert(lowerAmountMsg); 
+                    //let the user proceed
+                } else {
+                    nextButton.disabled = false;
+                }
+            }
+        }
+    });
+
+
+
+function showStep() {
+    //step is set to whatever part of the json we're on
+            let step = model.activeSteps[model.stepIndex];
+            //prevstep is the last step
+            let previousStep = model.activeSteps[model.stepIndex - 1];
+            //feedback started as blank
+            let feedbackMessage = "";
+            //checks if there is feedback for the last step and if it is a string value. this is basically here because of the saucecount step, where i was having trouble that it would say too many sauces but would 
+            //let you through anyway.
+            if (previousStep && typeof previousStep.feedback === "string") {
+                //sets the last choice to the value of the last step, so that it can be plugged into the feedback message
+                let lastChoice = model.order[previousStep.key];
+                //shows the value of the last choice in the feedback by replacing {{option}} with the actual choice made, so it is more personalized and specific to the user's order
+                feedbackMessage = previousStep.feedback.replace("{{option}}", lastChoice);
+            } 
+        
+        
+//the order in which the customization steps are shown, and the data for those steps, is based on the json in the model, which is based on the burger selected
+            render_view("steptemplate", {
+            username: model.username,
+            selectedBurger: model.selectedBurger,
+            title: step.title,
+            options: step.options,
+            isText: step.type === "text",
+            isCheckbox: step.type === "checkbox",
+            isMultipleChoice: step.type === "multiple choice",
+            isImageSelection: step.type === "image-selection",
+            imageOptions: step.imageOptions,
+            currentOrder: model.order,
+            feedback: feedbackMessage
+    })
+}
+
+
+
+    
+
 startApp();
-readytoOrder();
+
+
