@@ -26,7 +26,7 @@ function checkOrder() {
     return model.activeSteps.every(step => {
       const choice = model.order[step.key];
       //checks if the choice of is not null for multiple choice or undefined for checkbox
-      return choice !== undefined && choice !== null;
+      return choice !== undefined || choice !== null;
     });
   }
 
