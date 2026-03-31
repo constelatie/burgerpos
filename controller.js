@@ -26,7 +26,7 @@ function checkOrder() {
     return model.activeSteps.every(step => {
       const choice = model.order[step.key];
       //checks if the choice of is not null for multiple choice or undefined for checkbox
-      return choice !== undefined || choice !== null;
+      return choice !== undefined && choice !== null && choice !== "";
     });
   }
 
@@ -73,7 +73,7 @@ function startApp() {
             //if nothing is selected and the user tries to move forward, an alert pops up asking them to select an option to proceed.
             else if(step.type === "multiple choice") {
                 let inputs = document.querySelector("input[name='option']:checked");
-                if(inputs.length === 0) {
+                if(!inputs) {
                     alert("Please select an option to proceed.");
                     return;
                 }
