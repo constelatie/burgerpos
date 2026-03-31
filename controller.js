@@ -34,10 +34,14 @@ function checkOrder() {
 function startApp() {
   const myBurgerData = "./burgers.json";
   //fetch json file for the info
-    fetch('https://jsonplaceholder.typicode.com/post'), {
+    fetch('https://jsonplaceholder.typicode.com/post', {
       method: 'POST',
       body: JSON.stringify(myBurgerData);
-    }
+    ,
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+  },
+          })
       //if there is a response, create the json
         .then((response) => response.json()) 
       //assign json data, then start
