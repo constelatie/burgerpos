@@ -173,7 +173,7 @@ function showStep() {
 function showTimedAlert(message) {
   const alertBox = document.createElement("div");
   alertBox.innerText = message;
-  document.body.appendChild(alertbox);
+  document.body.appendChild(alertBox);
 
   setTimeout(() => {
     alertBox.remove();
