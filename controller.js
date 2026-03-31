@@ -123,7 +123,7 @@ function startApp() {
         if (e.target.id === "textInput") {
             let step = model.activeSteps[model.stepIndex];
             //input is a string, so change it to an integer to compare it to the condition in the feedback
-            if (step.id === "saucecount") {
+            if (step && step.id === "saucecount") {
                 let amount = parseInt(e.target.value);
                 //access the next button
                 let nextButton = document.querySelector("#next");
@@ -145,11 +145,13 @@ function startApp() {
 function showStep() {
     //step is set to whatever part of the json we're on
             let step = model.activeSteps[model.stepIndex];
-            let feedbackMessage = step.feedback.message;
-            alert(feedbackMessage);
-            setTimeout(() => {
-              alert.remove()
-            }, 5000);
+            let previousStep = model.activeSteps[model.stepIndex - 1];
+            let feedbackMessage = "";
+            if(previousStep)
+            {
+              let lastChoice = model.order[previousStep.key];
+              showTimedAlert(feedbackMessage);
+            }
         
         
 //the order in which the customization steps are shown, and the data for those steps, is based on the json in the model, which is based on the burger selected
@@ -166,6 +168,16 @@ function showStep() {
             currentOrder: model.order,
             feedback: feedbackMessage
     })
+}
+
+function showTimedAlert(message) {
+  const alertBox = document.createElement("div");
+  alertBox.innerText = message;
+  document.body.appendChild(alertbox);
+
+  setTimeout(() => {
+    alertBox.remove();
+  }, 5000);
 }
     
 
