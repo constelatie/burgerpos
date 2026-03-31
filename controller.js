@@ -22,11 +22,10 @@ function render_view(view_id, data) {
 }
 //function to start the app 
 function startApp() {
-  fetch("./burgers.json") 
-          {
-            .then(function (response)
-            model.activeSteps = data
-          }
+  fetch("./burgers.json").then((response) => {return response.json});
+  .then((results) ==> { activeSteps = results; })
+  .catch((err) => { console.error(err));
+}
     //shows the start template first
     render_view("starttemplate", {});
     document.addEventListener("submit", function(e) {
