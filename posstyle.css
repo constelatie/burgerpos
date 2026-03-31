@@ -3,6 +3,11 @@ body {
 
 }
 
+.container-fluid {
+    background-color: black !important;
+}
+
+
 label {
     font-weight: bold !important;
     color: white !important;
