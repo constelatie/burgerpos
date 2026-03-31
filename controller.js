@@ -20,6 +20,16 @@ function render_view(view_id, data) {
     var html = template(data); 
     document.querySelector("#view_widget").innerHTML = html; 
 }
+
+function checkOrder() {
+    //basically go through every step to see if the user put in something
+    return model.activeSteps.every(step => {
+      const choice = model.order[step.key];
+      //checks if the choice of that step is either blank for text input, or undefined for multiple choice or null for checkbox
+      return choice !== undefined && choice !== null && choice ==! "";
+    });
+  }
+
 //function to start the app 
 function startApp() {
   //fetch json file for the info
@@ -162,14 +172,6 @@ function showStep() {
               feedbackMessage = previousStep.feedback.replace("{{option}}", lastChoice);
     }
 
-  function checkOrder() {
-    //basically go through every step to see if the user put in something
-    return model.activeSteps.every(step => {
-      const choice = model.order[step.key];
-      //checks if the choice of that step is either blank for text input, or undefined for multiple choice or null for checkbox
-      return choice !== undefined && choice !== null && choice ==! "";
-    });
-  }
         
 //the order in which the customization steps are shown, and the data for those steps, is based on the json in the model, which is based on the burger selected
             render_view("steptemplate", {
