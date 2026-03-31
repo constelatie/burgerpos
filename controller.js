@@ -152,7 +152,15 @@ function showStep() {
               let lastChoice = model.order[previousStep.key];
               feedbackMessage = previousStep.feedback.replace("{{option}}", lastChoice);
     }
-        
+
+  function checkOrder {
+    //basically go through every step to see if the user put in something
+    return model.activeSteps.every(step => {
+      const choice = model.order[step.key];
+      //checks if the choice of that step is either blank for text input, or undefined for multiple choice or null for checkbox
+      return choice !== undefined && choice !== null && choice ==! "";
+    });
+  }
         
 //the order in which the customization steps are shown, and the data for those steps, is based on the json in the model, which is based on the burger selected
             render_view("steptemplate", {
