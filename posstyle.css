@@ -90,6 +90,9 @@ div {
     padding: auto;
     width: 50px !important;
     height: 50px !important;
-    border: 2px solid black !important;
+    border: 5px solid white !important;
+    text-align: center;
+    list-style-type: none;
+    display: block;
 }
 
