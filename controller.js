@@ -28,7 +28,7 @@ function startApp() {
         .then((response) => response.json()) 
       //assign json data, then start
         .then((data) => {
-            model.burgerChoices = data.burgerChoices;
+            model.selectedBurger = data.burgerChoices;
             render_view("starttemplate", {}); 
         })
         .catch((err) => {
