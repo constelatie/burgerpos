@@ -153,7 +153,7 @@ function showStep() {
               feedbackMessage = previousStep.feedback.replace("{{option}}", lastChoice);
               //function to remove the feedback message from the top after 5 seconds
               setTimeout(() => {
-                feedbackMessage.remove()
+                feedback.remove()
               }, 5000);
     }
         
