@@ -32,8 +32,12 @@ function checkOrder() {
 
 //function to start the app 
 function startApp() {
+  const myBurgerData = "./burgers.json";
   //fetch json file for the info
-    fetch("./burgers.json")
+    fetch('https://jsonplaceholder.typicode.com/post'), {
+      method: 'POST',
+      body: JSON.stringify(myBurgerData);
+    }
       //if there is a response, create the json
         .then((response) => response.json()) 
       //assign json data, then start
