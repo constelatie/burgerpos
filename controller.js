@@ -115,6 +115,11 @@ function startApp() {
           alert("Your order has been placed, " + model.username + "! Thank you for choosing Christiana's!");
           render_view("starttemplate", {});
       }
+      if(e.target.id === "home") {
+        e.preventDefault();
+        alert("Going back to the start, + model.username + "!");
+        render_view("starttemplate", {});
+      }
       //if the user missed some steps and wants to go back, resets the step index and uses showstep() to go back to the start of the step view
       if(e.target.id === "go-back") {
         e.preventDefault();
