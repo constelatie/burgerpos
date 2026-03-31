@@ -81,6 +81,8 @@ div {
 }
 
 .finalpicture {
+    margin: auto;
+    padding: auto;
     width: 50px !important;
     height: 50px !important;
     border: 2px solid black !important;
