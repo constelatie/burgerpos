@@ -147,11 +147,15 @@ function showStep() {
             let step = model.activeSteps[model.stepIndex];
             let previousStep = model.activeSteps[model.stepIndex - 1];
             let feedbackMessage = "";
-            if(previousStep)
-            {
+  //if the feedback is just a string, just give the feedback. this is here to check for when we need to check if more than 4 sauces were inputted
+            if (previousStep && typeof previousStep.feedback === "string") {
               let lastChoice = model.order[previousStep.key];
-              showTimedAlert(feedbackMessage);
-            }
+              feedbackMessage = previousStep.feedback.replace("{{option}}", lastChoice);
+              //function to remove the feedback message from the top after 5 seconds
+              setTimeout(() => {
+                feedbackMessage.remove()
+              }, 5000);
+    }
         
         
 //the order in which the customization steps are shown, and the data for those steps, is based on the json in the model, which is based on the burger selected
@@ -170,15 +174,7 @@ function showStep() {
     })
 }
 
-function showTimedAlert(message) {
-  const alertBox = document.createElement("div");
-  alertBox.innerText = message;
-  document.body.appendChild(alertBox);
 
-  setTimeout(() => {
-    alertBox.remove();
-  }, 5000);
-}
     
 
 
