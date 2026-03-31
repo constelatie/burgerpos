@@ -111,6 +111,7 @@ function startApp() {
             e.preventDefault();
             showStep();
     }
+      )}
     //happens at the end when the user confirms their order and the view resets to the start page
     if(e.target.id === "confirm") {
         e.preventDefault();
@@ -166,6 +167,7 @@ function showStep() {
             feedback: feedbackMessage
     })
 }
+    
 
 
 
