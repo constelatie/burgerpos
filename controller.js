@@ -117,8 +117,6 @@ function startApp() {
         alert("Your order has been placed, " + model.username + "! Thank you for choosing Christiana's!");
         render_view("starttemplate", {});
     }
-})
-}
     //eventlistener put in specifically to check how many sauces are inputted
     document.addEventListener("input", function(e) {
         if (e.target.id === "textInput") {
