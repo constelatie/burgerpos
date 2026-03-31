@@ -1,0 +1,130 @@
+burgerChoices: {
+    classic: [ //classic burger steps
+            {
+                id: "bun",
+                key: "bun",
+                title: "Choose your bun",
+                options: ["Sesame", "Whole Wheat", "Gluten Free"],
+                type: "multiple choice",
+                feedback: "Great choice! The {{option}} bun is a delicious addition to your burger."
+            },
+            {
+                id: "protein",
+                key: "protein",
+                title: "Choose your protein",
+                options: ["Beef", "Chicken", "Veggie"],
+                type: "multiple choice",
+                feedback: "Excellent! The {{option}} patty is a tasty choice for your burger."
+            },
+            {
+                id: "toppings",
+                key: "toppings",
+                title: "Choose your toppings",
+                options: ["Lettuce", "Tomato", "Onion", "Pickles", "Cheese"],
+                type: "checkbox",
+                feedback: "Yum! Adding {{option}} will give your burger an extra burst of flavor."
+            },
+            {
+                id: "sauces",
+                key: "sauces",
+                title: "Choose your sauces",
+                options: ["Ketchup", "Mustard", "Mayo", "BBQ Sauce"],
+                type: "checkbox",
+                feedback: "Delicious! Adding {{option}} will enhance the taste of your burger."
+            },
+            {
+                id: "saucecount",
+                key: "saucecount",
+                title: "How many sauces would you like?",
+                type: "text",
+                feedback: {
+                    condition: "amount > 4",
+                    message: "Wow, that's too much! {{option}} sauces will overpower your meal. Consider using less for a more balanced flavor."
+                }
+            },
+            {
+                id: "extras",
+                key: "extras",
+                title: "Choose your extras",
+                options: ["Bacon", "Double Patty", "Fried Egg"],
+                type: "multiple choice",
+                feedback: "Delicious! Adding {{option}} will take your burger to the next level."
+            },
+            {
+                id: "presentation",
+                key: "presentation",
+                title: "Choose your presentation",
+                imageOptions: [
+                    { "url": "https://blog-content.omahasteaks.com/wp-content/uploads/2022/06/blogwp_classic-american-burger-scaled-1.jpg"},
+                    { "url": "https://cdn.metrodiner.io/wp-content/uploads/s3.amazonaws.com/toasttab/restaurants/restaurant-155624000000000000/menu/items/5/item-800000002373861105_1755787838.jpg"},
+                    { "url": "https://png.pngtree.com/thumb_back/fw800/background/20250712/pngtree-classic-beef-burger-with-fresh-lettuce-tomato-onion-and-sesame-seed-image_17580392.webp"}
+                ],
+                type: "image-selection",
+                feedback: "Great choice! Serving your burger {{option}} will make it look as good as it tastes."
+            }
+        ],
+    cheeseburger: [ //cheeseburger steps
+        {
+                id: "bun",
+                key: "bun",
+                title: "Choose your bun",
+                options: ["Sesame", "Whole Wheat", "White Bread"],
+                type: "multiple choice",
+                feedback: "Great choice! The {{option}} bun is a delicious addition to your burger."
+            },
+            {
+                id: "protein",
+                key: "protein",
+                title: "Choose your protein",
+                options: ["Beef", "Steak", "Tofu"],
+                type: "multiple choice",
+                feedback: "Excellent! The {{option}} patty is a tasty choice for your burger."
+            },
+            {
+                id: "toppings",
+                key: "toppings",
+                title: "Choose your toppings",
+                options: ["Lettuce", "Tomato", "Onion", "Pickles", "Cheese"],
+                type: "checkbox",
+                feedback: "Yum! Adding {{option}} will give your burger an extra burst of flavor."
+            },
+            {
+                id: "sauces",
+                key: "sauces",
+                title: "Choose your sauces",
+                options: ["Ketchup", "Mustard", "Honey Mustard", "BBQ Sauce"],
+                type: "checkbox",
+                feedback: "Delicious! Adding {{option}} will enhance the taste of your burger."
+            },
+            {
+                id: "saucecount",
+                key: "saucecount",
+                title: "How many sauces would you like?",
+                type: "text",
+                feedback: {
+                    condition: "amount > 4",
+                    message: "Wow, that's too much! {{option}} sauces will overpower your meal. Consider using less for a more balanced flavor."
+                }
+            },
+            {
+                id: "extras",
+                key: "extras",
+                title: "Choose your extras",
+                options: ["Bacon", "Double Patty", "Fried Egg"],
+                type: "multiple choice",
+                feedback: "Delicious! Adding {{option}} will take your burger to the next level."
+            },
+            {
+                id: "presentation",
+                key: "presentation",
+                title: "Choose your presentation",
+                imageOptions: [
+                    { "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cheeseburger.jpg/1280px-Cheeseburger.jpg"},
+                    { "url": "https://www.kitchensanctuary.com/wp-content/uploads/2021/05/Double-Cheeseburger-square-FS-42.jpg"},
+                    { "url": "https://www.allrecipes.com/thmb/QQU_XsfGlF8Vi1PBfWFeBfDCewE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/279210double-cheeseburgerChefMo4x3-6da33f11c8174d718197444338ce7419.jpg"}
+                ],
+                type: "image-selection",
+                feedback: "Great choice! Serving your burger {{option}} will make it look as good as it tastes."
+            }
+    ]
+}
