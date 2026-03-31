@@ -97,6 +97,12 @@ function startApp() {
             e.preventDefault();
             render_view("orderform", {customerName: model.username});
         }
+      //happens at the end when the user confirms their order and the view resets to the start page
+        if(e.target.id === "confirm") {
+          e.preventDefault();
+          alert("Your order has been placed, " + model.username + "! Thank you for choosing Christiana's!");
+          render_view("starttemplate", {});
+      }
         //when the user picks their burger, activeSteps is assigned the json data for the steps of that burger, and the first step is shown
         if(e.target.id === "placeorder") {
             model.selectedBurger = document.getElementById("burger").value;
@@ -112,12 +118,6 @@ function startApp() {
             showStep();
     }
     })
-    //happens at the end when the user confirms their order and the view resets to the start page
-    if(e.target.id === "confirm") {
-        e.preventDefault();
-        alert("Your order has been placed, " + model.username + "! Thank you for choosing Christiana's!");
-        render_view("starttemplate", {});
-    }
     //eventlistener put in specifically to check how many sauces are inputted
     document.addEventListener("input", function(e) {
         if (e.target.id === "textInput") {
